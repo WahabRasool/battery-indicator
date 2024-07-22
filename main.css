@@ -1,0 +1,133 @@
+.battery {
+    --br: 1vmin;
+    --brc: #1f2020;
+    box-sizing: border-box;
+    position: relative;
+    width: 20vmin;
+    height: calc(50vmin + 2 * var(--br));
+    border: var(--br) solid var(--brc);
+    border-radius: 2vmin;
+    top: 5vmin;
+    --s: 10vmin;
+    --c1:#FBF7F4;
+    --c2:#5E9FA3;
+    --n: 5;
+    background: linear-gradient(var(--c1) calc(calc(var(--s)/2) * var(--n)), #0000 0), linear-gradient(var(--c2) calc(100% - 1.41vmin), #0000 0) 50% 0.71vmin/75% calc(var(--s)/2) repeat-y, radial-gradient(var(--c2) 50%, var(--c1) 52%) 0 0/calc(var(--s)/2 - var(--br)/2) calc(var(--s)/2);
+    animation: bat-level 10s steps(12, jump-both) infinite alternate;
+  }
+  .battery:before {
+    font-family: system-ui, sans-serif;
+    font-size: 1.8vmin;
+    line-height: 0.8;
+    --h: 3.5vmin;
+    box-sizing: border-box;
+    --p: calc(10 * (10 - var(--n)));
+    counter-reset: variable var(--p);
+    content: counter(variable) "%";
+    --clr: color-mix(in lab, var(--c2), #fff9 60%);
+    color: var(--clr);
+    text-align: center;
+    position: absolute;
+    width: 40%;
+    left: 30%;
+    height: var(--h);
+    top: calc(-1 * var(--h));
+    border: inherit;
+    border-radius: 1vmin 1vmin 0 0;
+    background-color: var(--brc);
+  }
+  
+  @keyframes bat-level {
+    0% {
+      --n: 10;
+      --c2: #E23636;
+    }
+    10% {
+      --n: 9;
+      --c2: #E23636;
+    }
+    20% {
+      --n: 8;
+      --c2: #E23636;
+    }
+    27% {
+      --c2: #F3D060;
+    }
+    30% {
+      --n: 7;
+      --c2: #F3D060;
+    }
+    40% {
+      --n: 6;
+      --c2: #F3D060;
+    }
+    47% {
+      --c2:#5E9FA3;
+    }
+    50%, 100% {
+      --n: 5;
+      --c2:#5E9FA3;
+    }
+    60% {
+      --n: 4;
+    }
+    70% {
+      --n: 3;
+    }
+    80% {
+      --n: 2;
+    }
+    90% {
+      --n: 1;
+    }
+    100% {
+      --n: 0;
+    }
+  }
+  /* fluff  the wall and the shadow*/
+  .noise {
+    display: hidden;
+  }
+  
+  .battery {
+    transform-style: preserve-3d;
+    transform: rotatex(20deg) rotatez(-2deg);
+  }
+  .battery:after {
+    transform-style: preserve-3d;
+    transform: translatez(-5px);
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    right: 0;
+    background: conic-gradient(at 25% 92%, #0000 0deg 10deg, #0009 0deg 90deg, #000c 0deg 91deg, #0009 0deg 115deg, #0000 0deg);
+    filter: url(#grainy) blur(0.1em);
+  }
+  
+  body {
+    display: grid;
+    place-content: center;
+    min-height: 100vh;
+    margin: 0;
+    --pri: #f3d060;
+    --bgdt: color-mix(in lab, var(--pri), #0006 40%);
+    --bgd10: color-mix(in lab, var(--pri), #000 10%);
+    --bgd20: color-mix(in lab, var(--pri), #000 20%);
+    --bgd20t: color-mix(in lab, var(--pri), #0006 20%);
+    background-color: var(--bgdt);
+    background-image: linear-gradient(358deg, transparent 45.2%, var(--pri) 45.5%, var(--bgd10) 45.6%, var(--bgd20t) 45.8%, var(--bgd10) 60%), linear-gradient(30deg, var(--bgd20), var(--bgdt) 90%);
+    overflow: hidden;
+  }
+  
+  .wall {
+    position: absolute;
+    width: 100%;
+    height: 50vmin;
+    top: calc(50% - 3vmin);
+    z-index: -100;
+    --pri: #f3d060;
+    background-color: var(--bgdt);
+    background-repeat: no-repeat;
+    background-image: linear-gradient(358deg, transparent 45.2%, var(--pri) 45.5%, var(--bgd10) 45.6%, var(--bgd20t) 45.8%, var(--bgd10) 60%), linear-gradient(30deg, var(--bgd20), var(--bgdt) 90%);
+  }
